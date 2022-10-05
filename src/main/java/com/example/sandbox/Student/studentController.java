@@ -1,8 +1,7 @@
 package com.example.sandbox.Student;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.time.Month;
@@ -15,24 +14,25 @@ public class studentController {
 //     the controller class is responsible for processing
 //     incoming REST API requests, preparing a model, and
 //     returning the view to be rendered as a response.
+//    let's have a reference to the student service
+    private final studentService studentServices;
+
+    @Autowired
+    public studentController(studentService studentServices) {
+        this.studentServices = studentServices;
+    }
+
+
 @GetMapping
 public List<student> getStudent(){
-    return List.of(
-            new student(
-                    1L,
-                    "Donald",
-                    23,
-                    LocalDate.of(2000, Month.FEBRUARY, 26),
-                    "kibetdonald@gmail.com"
-            ),
-            new student(
-                    2L,
-                    "Doreen",
-                    23,
-                    LocalDate.of(2002, Month.FEBRUARY, 17),
-                    "kibetdonald@gmail.com"
-            )
-    );
+    return studentServices.getStudent();
 }
+
+//Post request
+    @PostMapping
+    public void registerNewStudent(@RequestBody student students){
+        studentServices.addNewStudent(students);
+    }
+
 }
 
