@@ -11,8 +11,7 @@ import java.time.Month;
 import java.util.List;
 
 @SpringBootApplication
-//add an annotation responsible for rest api
-@RestController
+
 public class SandboxApplication {
 
 	public static void main(String[] args) {
@@ -20,17 +19,6 @@ public class SandboxApplication {
 	}
 //	create a class
 //	annotate the class
-	@GetMapping
-	public List<student> hello(){
-		return List.of(
-				new student(
-						1L,
-						"Donald",
-						23,
-						LocalDate.of(2000, Month.FEBRUARY, 26),
-						"kibetdonald@gmail.com"
-				)
-		);
-	}
+
 
 }
