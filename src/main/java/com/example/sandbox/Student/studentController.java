@@ -33,6 +33,19 @@ public List<student> getStudent(){
     public void registerNewStudent(@RequestBody student students){
         studentServices.addNewStudent(students);
     }
-
+    @DeleteMapping(path="{studentsId}")
+    public void deleteStudent(@PathVariable("studentsId") Long studentsId){
+        studentServices.deleteStudent(studentsId);
+    }
+    @PutMapping(path="{studentsId}")
+    public void updateStudent(
+            @PathVariable("studentsId") Long studentsId,
+            @RequestParam(required = false) String name,
+            @RequestParam(required = false) String email
+    )
+    {
+        studentServices.updateStudents(studentsId, name, email);
+    }
 }
+
 
